@@ -50,7 +50,7 @@ class Layout extends React.Component {
               <li className="dropdown">
                 <a href="#" className="dropdown-toggle text-danger btn-lg" data-toggle="dropdown" role="button" aria-expanded="false"><i className="fa fa-user-circle-o text-danger" aria-hidden="true"></i></a>
                 <ul className="dropdown-menu row dropdown-menu-right" role="menu">
-                  {authenticated ? <li ><a href="#" className="text-secondary username mx-3"  onClick={this.logout}>Log out</a></li> : <li ><a href="#" className="text-secondary username mx-3">Log in</a></li>}
+                  {authenticated ? <li ><a href="#" className="text-secondary username mx-3"  onClick={this.logout}>Log out</a></li> : <li ><a href={`/login`} className="text-secondary username mx-3">Log in</a></li>}
                   <div className="dropdown-divider"></div>
                   <li ><a href="#" className="text-secondary mx-3">Host your home</a></li>
                   <div className="dropdown-divider"></div>
