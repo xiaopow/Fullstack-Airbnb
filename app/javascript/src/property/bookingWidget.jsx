@@ -89,13 +89,12 @@ class BookingWidget extends React.Component {
   onDatesChange = ({ startDate, endDate }) => this.setState({ startDate, endDate })
   onFocusChange = (focusedInput) => {
     this.setState({ focusedInput });
-    console.log(focusedInput);
   }
 
   isDayBlocked = (day) => {
-    if (this.state.focusedInput = "startDate") {
+    if (this.state.focusedInput === "startDate") {
       return this.state.existingBookings.filter(b => day.isBetween(b.start_date, b.end_date, null, '[)')).length > 0
-    } else if (this.state.focusedInput = "endDate") {
+    } else if (this.state.focusedInput === "endDate") {
       return this.state.existingBookings.filter(b => day.isBetween(b.start_date, b.end_date, null, '(]')).length > 0
     }
   }

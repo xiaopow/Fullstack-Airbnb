@@ -24,9 +24,16 @@ module Api
       render 'api/bookings/index'
     end
 
+    def unique_booking
+      @booking = Booking.find_by(id: params[:id])
+      return render json: { error: 'booking not found' }, status: :not_found if !@booking
+
+      render 'api/bookings/show', status: :ok
+    end
+
     private
     def booking_params
-      params.require(:booking).permit(:property_id, :start_date, :end_date)
+      params.require(:booking).permit(:property_id, :start_date, :end_date, :id)
     end
   end
 end

@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     resources :bookings, only: [:create]
     resources :charges, only: [:create]
 
-
+    get '/bookings/:id' => 'bookings#unique_booking'
     get '/properties/:id/bookings' => 'bookings#get_property_bookings'
     get '/authenticated' => 'sessions#authenticated'
     delete '/sessions'   => 'sessions#destroy'
