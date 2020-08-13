@@ -17,5 +17,8 @@ class StaticPagesController < ApplicationController
     render 'bookingsuccess'
   end
 
+  def mybookings
+    render 'mybookings'
+  end
 
 end

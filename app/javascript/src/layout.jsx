@@ -54,7 +54,7 @@ class Layout extends React.Component {
                   <div className="dropdown-divider"></div>
                   <li ><a href="#" className="text-secondary mx-3">Host your home</a></li>
                   <div className="dropdown-divider"></div>
-                  <li ><a href="#" className="text-secondary mx-3">Your bookings</a></li>
+                  <li ><a href={`/mybookings`} className="text-secondary mx-3">Your bookings</a></li>
                 </ul>
               </li>
             </ul>
