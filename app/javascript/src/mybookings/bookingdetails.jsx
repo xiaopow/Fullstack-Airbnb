@@ -24,6 +24,11 @@ class Bookingdetails extends React.Component {
   render () {
     const { booking } = this.props;
     const { id } = booking;
+
+//    if (!bookingdetails) {
+//      return null;
+//    }
+
     const { bookingdetails } = this.state;
     const {
       start_date,
@@ -31,13 +36,19 @@ class Bookingdetails extends React.Component {
       property,
     } = bookingdetails;
 
-    if (!bookingdetails) {
-      return null;
-    }
+//    const {
+//      city,
+//      title,
+//    } = property
 
     return (
-      <div className="col-12">
-        <p>{start_date} and {end_date} and {property.title}</p>
+      <div className="col-6 col-lg-4 mb-4 property">
+        <a href="#" className="text-body text-decoration-none">
+          <div className="property-image mb-1 rounded" />
+          <p className="text-uppercase mb-0 text-secondary"><small><b>property.city</b></small></p>
+          <h6 className="mb-0">property.title</h6>
+          <p className="mb-0"><small>Booked from {start_date} to {end_date} </small></p>
+        </a>
       </div>
     )
   }
