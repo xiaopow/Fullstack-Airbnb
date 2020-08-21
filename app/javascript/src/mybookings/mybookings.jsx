@@ -23,7 +23,6 @@ class Mybookings extends React.Component {
           bookings: data.bookings,
         })
       })
-      console.log(this.state.currentDateTime);
   }
 
   render () {
