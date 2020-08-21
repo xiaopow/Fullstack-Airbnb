@@ -7,7 +7,7 @@ import './bookingdetails.scss';
 
 class Bookingdetails extends React.Component {
   state = {
-    bookingdetails: {},
+    bookingdetails: null,
   }
 
   componentDidMount() {
@@ -36,18 +36,19 @@ class Bookingdetails extends React.Component {
       property,
     } = bookingdetails;
     const {
-      city,
       title,
+      city,
+      country,
+      image_url,
     } = property;
 
-    console.log(this.state.bookingdetails);
-
     return (
-      <div className="col-6 col-lg-4 mb-4 property">
+
+      <div className="col-4 col-lg-3 mb-4 property">
         <a href="#" className="text-body text-decoration-none">
-          <div className="property-image mb-1 rounded" />
-          <p className="text-uppercase mb-0 text-secondary"><small><b>city</b></small></p>
-          <h6 className="mb-0">property.title</h6>
+          <p className="text-uppercase mb-0 text-secondary"><small><b>{city}, {country}</b></small></p>
+          <div className="property-image mb-1 rounded" style={{ backgroundImage: `url(${image_url})` }} />
+          <h6 className="mb-0">{title}</h6>
           <p className="mb-0"><small>Booked from {start_date} to {end_date} </small></p>
         </a>
       </div>

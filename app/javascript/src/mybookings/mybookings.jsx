@@ -33,6 +33,12 @@ class Mybookings extends React.Component {
         <div className="container ">
           <div className="row">
             <div className="col-12">
+              <div className="title text-center text-danger mt-4 mb-5"><b>Your bookings</b>
+              </div>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-12">
               <div><b>Your upcoming bookings:</b></div>
               <div className="row">
                 {bookings.length > 0 ? bookings.map((booking) => {
@@ -55,6 +61,9 @@ class Mybookings extends React.Component {
                       />);
                     }
                   }) : <p>No upcoming booking</p>}
+              </div>
+              <div className="text-center mt-4 mb-5">
+                <a role="button" href={`/`} className="btn btn-danger">Book another property</a>
               </div>
             </div>
           </div>
