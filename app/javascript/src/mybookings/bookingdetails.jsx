@@ -14,7 +14,6 @@ class Bookingdetails extends React.Component {
     fetch(`/api/bookings/${this.props.booking.id}`)
       .then(handleErrors)
       .then(data => {
-        console.log(data);
         this.setState({
           bookingdetails: data.booking,
         })

@@ -15,7 +15,8 @@ Rails.application.routes.draw do
     resources :charges, only: [:create]
 
     get '/bookings/:id' => 'bookings#unique_booking'
-    get '/mybookings' => 'bookings#all_user_bookings'
+    get '/mypastbookings' => 'bookings#past_user_bookings'
+    get '/myupcomingbookings' => 'bookings#upcoming_user_bookings'
     get '/properties/:id/bookings' => 'bookings#get_property_bookings'
     get '/authenticated' => 'sessions#authenticated'
     delete '/sessions'   => 'sessions#destroy'

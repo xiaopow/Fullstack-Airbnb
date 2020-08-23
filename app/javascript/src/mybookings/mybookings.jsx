@@ -10,23 +10,84 @@ import './mybookings.scss';
 
 class Mybookings extends React.Component {
   state = {
-    bookings: [],
-    loading: true,
-    currentDateTime: moment().format("YYYY-MM-DD"),
+    pastbookings: [],
+    past_total_pages: null,
+    past_next_page: null,
+    upcomingbookings: [],
+    upcoming_total_pages: null,
+    upcoming_next_page: null,
+    pastloading: true,
+    upcomingloading: true,
   }
 
   componentDidMount() {
-    fetch(`/api/mybookings`)
+    this.getPastBookings();
+    this.getUpcomingBookings();
+  }
+
+  getPastBookings = () => {
+    fetch(`/api/mypastbookings?page=1`)
       .then(handleErrors)
       .then(data => {
         this.setState({
-          bookings: data.bookings,
+          pastbookings: data.bookings,
+          past_total_pages: data.total_pages,
+          past_next_page: data.next_page,
+          pastloading: false,
         })
       })
   }
 
+  getUpcomingBookings = () => {
+    fetch(`/api/myupcomingbookings?page=1`)
+      .then(handleErrors)
+      .then(data => {
+        this.setState({
+          upcomingbookings: data.bookings,
+          upcoming_total_pages: data.total_pages,
+          upcoming_next_page: data.next_page,
+          upcomingloading: false,
+        })
+      })
+  }
+
+  loadMorePastBookings = () => {
+      if (this.state.past_next_page === null) {
+        return;
+      }
+      this.setState({ pastloading: true });
+      fetch(`/api/mypastbookings?page=${this.state.past_next_page}`)
+        .then(handleErrors)
+        .then(data => {
+          this.setState({
+            pastbookings: this.state.pastbookings.concat(data.bookings),
+            past_total_pages: data.total_pages,
+            past_next_page: data.next_page,
+            pastloading: false,
+          })
+        })
+    }
+
+    loadMoreUpcomingBookings = () => {
+        if (this.state.upcoming_next_page === null) {
+          return;
+        }
+        this.setState({ upcomingloading: true });
+        fetch(`/api/mypastbookings?page=${this.state.upcoming_next_page}`)
+          .then(handleErrors)
+          .then(data => {
+            this.setState({
+              upcomingbookings: this.state.upcomingbookings.concat(data.bookings),
+              upcoming_total_pages: data.total_pages,
+              upcoming_next_page: data.next_page,
+              upcomingloading: false,
+            })
+          })
+      }
+
+
   render () {
-    const { bookings, loading, currentDateTime } = this.state;
+    const { pastbookings, past_next_page, upcomingbookings, upcoming_next_page, pastloading, upcomingloading } = this.state;
 
     return (
       <Layout >
@@ -41,28 +102,44 @@ class Mybookings extends React.Component {
             <div className="col-12">
               <div><b>Your upcoming bookings:</b></div>
               <div className="row">
-                {bookings.length > 0 ? bookings.map((booking) => {
-                  if (booking.start_date >= this.state.currentDateTime) {
-                    return (<Bookingdetails
+                {upcomingbookings.length > 0 ? upcomingbookings.map((booking) => {
+                    return (
+                      <Bookingdetails
                       key={booking.id}
                       booking={booking}
                       />);
-                    }
                   }) : <p>No upcoming booking</p>}
               </div>
+              {upcomingloading && <p>loading...</p>}
+              {(upcomingloading || upcoming_next_page === null) ||
+              <div className="text-center">
+                <button
+                  className="btn btn-light mb-3"
+                  onClick={this.loadMoreUpcomingBookings}
+                >Load more</button>
+              </div>
+            }
               <hr />
               <div><b>Your past bookings:</b></div>
               <div className="row">
-                {bookings.length > 0 ? bookings.map((booking) => {
-                  if (booking.start_date < this.state.currentDateTime) {
-                    return (<Bookingdetails
+                {pastbookings.length > 0 ? pastbookings.map((booking) => {
+                    return (
+                      <Bookingdetails
                       key={booking.id}
                       booking={booking}
                       />);
-                    }
-                  }) : <p>No upcoming booking</p>}
+                  }) : <p>No past booking</p>}
               </div>
-              <div className="text-center mt-4 mb-5">
+                {pastloading && <p>loading...</p>}
+                {(pastloading || past_next_page === null) ||
+                <div className="text-center">
+                  <button
+                    className="btn btn-light mb-3"
+                    onClick={this.loadMorePastBookings}
+                  >Load more</button>
+                </div>
+              }
+              <div className="text-center mt-3 mb-5">
                 <a role="button" href={`/`} className="btn btn-danger">Book another property</a>
               </div>
             </div>
