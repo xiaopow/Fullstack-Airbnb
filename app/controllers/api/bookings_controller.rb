@@ -37,7 +37,7 @@ module Api
       return render json: { error: 'error' }, status: :not_found if !session
 
       user = session.user
-      @bookings = user.bookings.where("start_date < ? ", Date.today).page(params[:page]).per(6)
+      @bookings = user.bookings.order(end_date: :desc).where("start_date < ? ", Date.today).page(params[:page]).per(6)
       render 'api/bookings/index'
     end
 
@@ -47,7 +47,7 @@ module Api
       return render json: { error: 'error' }, status: :not_found if !session
 
       user = session.user
-      @bookings = user.bookings.where("start_date >= ? ", Date.today).page(params[:page]).per(6)
+      @bookings = user.bookings.order(end_date: :desc).where("start_date >= ? ", Date.today).page(params[:page]).per(6)
       render 'api/bookings/index'
     end
 

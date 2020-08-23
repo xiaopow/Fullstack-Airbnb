@@ -51,7 +51,7 @@ class Bookingsuccess extends React.Component {
               <div className="property-image my-2 rounded" style={{ backgroundImage: `url(${property.image_url})` }} />
             </div>
             <div className="col-12">
-              <a role="button" href={`/mybookings`} className="btn btn-danger my-3">All my bookings</a>
+              <a role="button" href={`/mybookings`} className="btn btn-danger my-3">See all my bookings</a>
             </div>
           </div>
         </div>
