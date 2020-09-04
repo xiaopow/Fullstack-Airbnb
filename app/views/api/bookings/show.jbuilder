@@ -14,7 +14,16 @@ json.booking do
     json.max_guests @booking.property.max_guests
     json.beds @booking.property.beds
     json.baths @booking.property.baths
-    json.image_url @booking.property.image_url
+    json.images @booking.property.images
   end
+
+  json.charges do
+    json.array! @booking.charges do |charge|
+      json.checkout_session_id charge.checkout_session_id
+      json.currency charge.currency
+      json.amount charge.amount
+    end
+  end
+
 
 end

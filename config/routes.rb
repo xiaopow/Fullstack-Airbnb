@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   get '/login' => 'static_pages#login'
   get '/booking/:id/success' =>  'static_pages#bookingsuccess'
   get '/mybookings' => 'static_pages#mybookings'
+  get '/myproperties' => 'static_pages#myproperties'
+  get '/listmyproperty' => 'static_pages#listmyproperty'
 
   namespace :api do
     # Add routes below this line
@@ -14,10 +16,16 @@ Rails.application.routes.draw do
     resources :bookings, only: [:create]
     resources :charges, only: [:create]
 
+    #BOOKINGS
     get '/bookings/:id' => 'bookings#unique_booking'
     get '/mypastbookings' => 'bookings#past_user_bookings'
     get '/myupcomingbookings' => 'bookings#upcoming_user_bookings'
     get '/properties/:id/bookings' => 'bookings#get_property_bookings'
+
+    #PROPERTY
+    post '/properties' => 'properties#create'
+
+    #SESSIONS
     get '/authenticated' => 'sessions#authenticated'
     delete '/sessions'   => 'sessions#destroy'
 

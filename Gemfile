@@ -42,6 +42,8 @@ gem 'stripe'
 #Use fontawesome
 gem "font-awesome-rails"
 
+gem 'aws-sdk', '~> 3.0'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
